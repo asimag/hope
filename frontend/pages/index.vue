@@ -1,5 +1,5 @@
 <template>
-  <Tutorial />
+  <FruitList />
 </template>
 
 <script>

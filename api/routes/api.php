@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/fruits', [FruitController::class, 'index'] );
+Route::get('fruits', [FruitController::class, 'index'] );
+Route::resource('contacts', \App\Http\Controllers\ContactController::class);
 

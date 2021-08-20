@@ -5,58 +5,65 @@
         Contact Form
       </div>
       <div class="card-body" />
-      <b-form v-if="show" class="p-4" @submit.prevent="onSubmit" @reset="onReset">
-        <b-form-group
-          id="input-group-1"
-          label="Email address:"
-          label-for="input-1"
-          description="We'll never share your email with anyone else."
-        >
-          <b-form-input
-            id="input-1"
-            v-model="form.email"
-            type="email"
-            placeholder="Enter email"
-            required
-          />
-        </b-form-group>
+      <b-form
+        v-if="show"
+        class="p-4"
+        @submit.prevent="onSubmit"
+        @reset="onReset"
+        @keydown="form.onKeydown($event)"
+      >
+        <AlertError :form="form" />
 
-        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-          <b-form-input
-            id="input-2"
-            v-model="form.name"
-            placeholder="Enter name"
-            required
-          />
-        </b-form-group>
-        <b-button type="submit" variant="primary">
-          Submit
-        </b-button>
-        <b-button type="reset" variant="danger">
-          Reset
-        </b-button>
+        <label for="email" class="form-label">Email</label>
+        <input id="email" v-model="form.email" type="text" name="email" class="form-control">
+        <HasError :form="form" field="email" />
+
+        <label for="name" class="mt-2 form-label">Name</label>
+        <input id="name" v-model="form.name" type="text" name="name" class="form-control">
+        <HasError :form="form" field="name" />
+
+        <div class="mt-4">
+          <Button :form="form" class="btn btn-primary">
+            Save
+          </Button>
+          <b-button type="reset" variant="danger">
+            Reset
+          </b-button>
+        </div>
       </b-form>
     </div>
   </div>
 </template>
 
 <script>
+import Form from 'vform'
+import { Button, HasError, AlertError } from 'vform/src/components/bootstrap5'
+
 export default {
 name: 'ContactForm',
+  components: {
+    Button, HasError, AlertError
+  },
   data () {
     return {
-      form: {
-        email: '',
-        name: ''
-      },
+      form: new Form(
+          {
+            email: '',
+            name: ''
+          }
+      ),
       show: true
     }
   },
   methods: {
     async onSubmit (event) {
-      // alert(JSON.stringify(this.form))
-       const response = (await this.$axios.post('contacts', this.form)).data
-      console.log(response)
+      Form.axios = this.$axios
+      try {
+        const response = await this.form.post('contacts')
+        console.log(response)
+      } catch {
+        console.log('Something went wrong')
+      }
     },
     onReset (event) {
       event.preventDefault()

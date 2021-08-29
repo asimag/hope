@@ -2,7 +2,7 @@
   <div class="mt-3 p-4">
     <div class="card">
       <div class="card-header">
-        Contact Form
+        Fruit
       </div>
       <div class="card-body" />
       <b-form
@@ -13,29 +13,19 @@
         @keydown="form.onKeydown($event)"
       >
         <AlertError :form="form" />
-
-        <label for="email" class="form-label">Email</label>
-        <input id="email" v-model="form.email" type="text" name="email" class="form-control">
-        <HasError :form="form" field="email" />
         <label for="name" class="mt-2 form-label">Name</label>
         <input id="name" v-model="form.name" type="text" name="name" class="form-control">
         <HasError :form="form" field="name" />
 
-        <label for="country" class="mt-2 form-label">Country</label>
-        <v-select
-          v-model="form.country_id"
-          :options="options"
-          label="nicename"
-          :reduce="(op) => op.id"
-        />
+        <label for="price" class="form-label">Price</label>
+        <input id="price" v-model="form.price" type="text" name="price" class="form-control">
+        <HasError :form="form" field="price" />
 
-        <label for="file" class="mt-2 form-label">Your Photo</label>
-        <input id="file" type="file" class="mt-2" name="file" @change="handleFile">
-        <HasError :form="form" field="file" />
+        <label for="quantity" class="form-label">Quantity</label>
+        <input id="quantity" v-model="form.quantity" type="text" name="quantity" class="form-control">
+        <HasError :form="form" field="quantity" />
 
-        <div v-if="form.progress">
-          Progress: {{ form.progress.percentage }}%
-        </div>
+
 
         <div class="mt-4">
           <Button :form="form" class="btn btn-primary">
@@ -63,10 +53,10 @@ name: 'ContactForm',
     return {
       form: new Form(
           {
-            email: '',
             name: '',
-            country_id: '',
-            file_name: null
+            price: '',
+            quantity: '',
+
           }
       ),
       show: true,
@@ -74,13 +64,14 @@ name: 'ContactForm',
     }
   },
   async mounted () {
-    this.options = (await this.$axios.get('countries')).data
+    this.form.fill( (await this.$axios.get('fruits/' + this.$route.params.id)).data);
   },
   methods: {
     async onSubmit (event) {
       Form.axios = this.$axios
       try {
-        const response = await this.form.post('contacts')
+        const response = await this.form.put('fruits/' + this.$route.params.id );
+        await this.$router.replace('/fruits/');
         console.log(response)
       } catch {
         console.log('Something went wrong')
@@ -89,7 +80,8 @@ name: 'ContactForm',
     onReset (event) {
       event.preventDefault()
       // Reset our form values
-      this.form.email = ''
+      this.form.price = ''
+      this.form.quantity = ''
       this.form.name = ''
       // Trick to reset/clear native browser form validation state
       this.show = false
@@ -97,14 +89,6 @@ name: 'ContactForm',
         this.show = true
       })
     },
-    handleFile (event) {
-      // We'll grab just the first file...
-      // You can also do some client side validation here.
-      const file = event.target.files[0]
-
-      // Set the file object onto the form...
-      this.form.file_name = file
-    }
 
   }
 }

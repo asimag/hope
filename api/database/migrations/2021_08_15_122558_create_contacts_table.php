@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('name', 32);
             $table->string('email', 32);
+            $table->integer('country_id');
             $table->timestamps();
         });
     }

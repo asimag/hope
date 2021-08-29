@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\FruitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('fruits', [FruitController::class, 'index'] );
+Route::resource('fruits', FruitController::class );
+Route::get('countries', [CountryController::class, 'index'] );
 Route::resource('contacts', \App\Http\Controllers\ContactController::class);
 

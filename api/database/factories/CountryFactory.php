@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Fruit;
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FruitFactory extends Factory
+class CountryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Fruit::class;
+    protected $model = Country::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class FruitFactory extends Factory
     public function definition()
     {
         return [
-            "name" => $this->faker->word,
-            "price" => rand(50, 500),
-            "quantity" => random_int(5, 20),
+            //
         ];
     }
 }

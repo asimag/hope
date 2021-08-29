@@ -14,7 +14,7 @@ class FruitController extends Controller
      */
     public function index()
     {
-        return Fruit::all();
+        return response()->json(Fruit::all());
     }
 
     /**
@@ -46,7 +46,7 @@ class FruitController extends Controller
      */
     public function show(Fruit $fruit)
     {
-        //
+        return response()->json($fruit);
     }
 
     /**
@@ -69,7 +69,8 @@ class FruitController extends Controller
      */
     public function update(Request $request, Fruit $fruit)
     {
-        //
+        $fruit->update($request->all());
+
     }
 
     /**

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 FruitSeeder::class,
-
+                CountrySeeder::class,
             ]
         );
 

@@ -64,14 +64,18 @@ name: 'ContactForm',
     }
   },
   async mounted () {
-    this.form.fill( (await this.$axios.get('fruits/' + this.$route.params.id)).data);
+    if (this.$route.params['id']) {
+      this.form.fill( (await this.$axios.get('fruits/' + this.$route.params.id)).data);
+    }
   },
   methods: {
     async onSubmit (event) {
       Form.axios = this.$axios
       try {
-        const response = await this.form.put('fruits/' + this.$route.params.id );
-        await this.$router.replace('/fruits/');
+        const response = (this.$route.params['id']) ?
+         await this.form.put('fruits/' + this.$route.params.id ) :
+            await this.form.post('fruits');
+        await this.$router.push('/fruits/');
         console.log(response)
       } catch {
         console.log('Something went wrong')

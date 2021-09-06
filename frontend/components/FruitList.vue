@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h3>Fruit List</h3>
+    <nuxt-link class="btn btn-sm btn-secondary" :to="'/fruits/create'">Add Fruit</nuxt-link>
     <v-client-table :data="fruits" :columns="columns" :options="options" >
         <template v-slot:actions="props">
           <nuxt-link :to="'/fruits/' + props.row.id + '/edit'">

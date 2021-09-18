@@ -34,7 +34,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/vue-tables-2.js',
-    '~plugins/vue-select-2.js'
+    '~plugins/vue-select-2.js',
+    '~plugins/vue-toasted.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -51,14 +52,15 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+      // Sweet Alert 2
+    'vue-sweetalert2/nuxt'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'http://hope.test/api'
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

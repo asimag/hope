@@ -19,7 +19,9 @@
     "tsutils": "^3.21.0",
     "vform": "^2.1.1",
     "vue-select": "^3.12.3",
-    "vue-tables-2": "^2.3.1"
+    "vue-sweetalert2": "^5.0.2",
+    "vue-tables-2": "^2.3.1",
+    "vue-toasted": "^1.1.28"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

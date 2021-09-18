@@ -78,10 +78,18 @@ class FruitController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Fruit  $fruit
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Fruit $fruit)
     {
-        //
+        try {
+            $name = $fruit->name;
+            $fruit->delete();
+            return response()->json($name);
+        }
+        catch (Exception $exception) {
+            return response()->json($exception->getMessage());
+        }
+
     }
 }

@@ -112,6 +112,17 @@
       <path value="$PROJECT_DIR$/api/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/api/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/api/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/api/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/api/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/api/vendor/spatie/laravel-medialibrary" />
+      <path value="$PROJECT_DIR$/api/vendor/spatie/image" />
+      <path value="$PROJECT_DIR$/api/vendor/spatie/temporary-directory" />
+      <path value="$PROJECT_DIR$/api/vendor/spatie/image-optimizer" />
+      <path value="$PROJECT_DIR$/api/vendor/league/glide" />
+      <path value="$PROJECT_DIR$/api/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/api/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/api/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/api/vendor/tymon/jwt-auth" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

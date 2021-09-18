@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\FruitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('fruits', FruitController::class );
-Route::get('countries', [CountryController::class, 'index'] );
-Route::resource('contacts', \App\Http\Controllers\ContactController::class);
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('fruits', FruitController::class );
+    Route::resource('users', UserController::class );
+    Route::get('countries', [CountryController::class, 'index'] );
+    Route::resource('contacts', \App\Http\Controllers\ContactController::class);
+});
+
+Route::group([
+
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
 

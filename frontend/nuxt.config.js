@@ -54,9 +54,27 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
       // Sweet Alert 2
-    'vue-sweetalert2/nuxt'
+    'vue-sweetalert2/nuxt',
+    '@nuxtjs/auth-next'
   ],
-
+  auth: {
+    strategies: {
+      'laravelJWT': {
+        provider: 'laravel/jwt',
+        url: 'http://hope.test',
+        token: {
+          property: 'access_token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
+        },
+      },
+    }
+  },
+  router: {
+    middleware: ['auth']
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'http://hope.test/api'
